@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Bogus;
+﻿using Bogus;
 using Bogus.DataSets;
+using Bogus.Extensions.Brazil;
 using Features.Clientes;
 using Xunit;
 
@@ -37,7 +35,7 @@ namespace Features.Tests
             //var clientefaker = new Faker<Cliente>();
             //clientefaker.RuleFor(c => c.Nome, (f, c) => f.Name.FirstName());
 
-            var clientes = new Faker<Cliente>("pt_BR")
+            var clientes = new Faker<Cliente>(locale: "pt_BR")
                 .CustomInstantiator(f => new Cliente(
                     Guid.NewGuid(), 
                     f.Name.FirstName(genero),
@@ -45,9 +43,10 @@ namespace Features.Tests
                     f.Date.Past(80,DateTime.Now.AddYears(-18)),
                     "",
                     ativo,
-                    DateTime.Now))
+                    DateTime.Now,
+                    f.Person.Cpf()))
                 .RuleFor(c=>c.Email, (f,c) => 
-                    f.Internet.Email(c.Nome!.ToLower(), c.Sobrenome!.ToLower()));
+                    f.Internet.Email(c.Nome!, c.Sobrenome!).ToLower());
 
             return clientes.Generate(quantidade);
         }
@@ -64,7 +63,8 @@ namespace Features.Tests
                     f.Date.Past(1, DateTime.Now.AddYears(1)),
                     "",
                     false,
-                    DateTime.Now));
+                    DateTime.Now,
+                    f.Person.Cpf()));
 
             return cliente;
         }

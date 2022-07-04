@@ -25,7 +25,7 @@ namespace Features.Tests
             var mediatr = new Mock<IMediator>();
 
             var clienteService = new ClienteService(clienteRepo.Object, mediatr.Object);
-
+            
             // Act
             clienteService.Adicionar(cliente);
 

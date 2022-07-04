@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
-using Features.Clientes;
+﻿using Features.Clientes;
 using FluentAssertions;
 using FluentAssertions.Extensions;
 using MediatR;
@@ -38,7 +36,7 @@ namespace Features.Tests
             // Assert
             cliente.EhValido().Should().BeTrue();
 
-            _clienteTestsAutoMockerFixture.Mocker.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente),Times.Once);
+            _clienteTestsAutoMockerFixture.Mocker!.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente),Times.Once);
             _clienteTestsAutoMockerFixture.Mocker.GetMock<IMediator>().Verify(m=>m.Publish(It.IsAny<INotification>(),CancellationToken.None),Times.Once);
         }
 
@@ -59,7 +57,7 @@ namespace Features.Tests
             cliente.EhValido().Should().BeFalse("Possui inconsistências");
             cliente.ValidationResult!.Errors.Should().HaveCountGreaterOrEqualTo(1);
 
-            _clienteTestsAutoMockerFixture.Mocker.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente), Times.Never);
+            _clienteTestsAutoMockerFixture.Mocker!.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente), Times.Never);
             _clienteTestsAutoMockerFixture.Mocker.GetMock<IMediator>().Verify(m => m.Publish(It.IsAny<INotification>(), CancellationToken.None), Times.Never);
         }
 
@@ -68,7 +66,7 @@ namespace Features.Tests
         public void ClienteService_ObterTodosAtivos_DeveRetornarApenasClientesAtivos()
         {
             // Arrange
-            _clienteTestsAutoMockerFixture.Mocker.GetMock<IClienteRepository>().Setup(c => c.ObterTodos())
+            _clienteTestsAutoMockerFixture.Mocker!.GetMock<IClienteRepository>().Setup(c => c.ObterTodos())
                 .Returns(_clienteTestsAutoMockerFixture.ObterClientesVariados());
 
             // Act

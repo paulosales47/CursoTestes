@@ -32,7 +32,7 @@ namespace Features.Tests
 
             // Assert
             Assert.True(cliente.EhValido());
-            _clienteTestsAutoMockerFixture.Mocker.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente),Times.Once);
+            _clienteTestsAutoMockerFixture.Mocker!.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente),Times.Once);
             _clienteTestsAutoMockerFixture.Mocker.GetMock<IMediator>().Verify(m=>m.Publish(It.IsAny<INotification>(),CancellationToken.None),Times.Once);
         }
 
@@ -48,7 +48,7 @@ namespace Features.Tests
 
             // Assert
             Assert.False(cliente.EhValido());
-            _clienteTestsAutoMockerFixture.Mocker.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente), Times.Never);
+            _clienteTestsAutoMockerFixture.Mocker!.GetMock<IClienteRepository>().Verify(r => r.Adicionar(cliente), Times.Never);
             _clienteTestsAutoMockerFixture.Mocker.GetMock<IMediator>().Verify(m => m.Publish(It.IsAny<INotification>(), CancellationToken.None), Times.Never);
         }
 
@@ -57,7 +57,7 @@ namespace Features.Tests
         public void ClienteService_ObterTodosAtivos_DeveRetornarApenasClientesAtivos()
         {
             // Arrange
-            _clienteTestsAutoMockerFixture.Mocker.GetMock<IClienteRepository>().Setup(c => c.ObterTodos())
+            _clienteTestsAutoMockerFixture.Mocker!.GetMock<IClienteRepository>().Setup(c => c.ObterTodos())
                 .Returns(_clienteTestsAutoMockerFixture.ObterClientesVariados());
 
             // Act

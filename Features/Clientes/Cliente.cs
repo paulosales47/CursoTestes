@@ -12,13 +12,14 @@ namespace Features.Clientes
         public DateTime DataCadastro { get; private set; }
         public string? Email { get; private set; }
         public bool Ativo { get; private set; }
+        public string? Cpf { get; set; }
 
         protected Cliente()
         {
         }
 
         public Cliente(Guid id, string nome, string sobrenome, DateTime dataNascimento, string email, bool ativo,
-            DateTime dataCadastro)
+            DateTime dataCadastro, string? cpf)
         {
             Id = id;
             Nome = nome;
@@ -27,6 +28,7 @@ namespace Features.Clientes
             Email = email;
             Ativo = ativo;
             DataCadastro = dataCadastro;
+            Cpf = cpf;
         }
 
         public string NomeCompleto()

@@ -40,7 +40,7 @@ namespace Features.Tests
 
             // Assert 
             Assert.False(result);
-            Assert.Empty(cliente.ValidationResult?.Errors);
+            Assert.NotEmpty(cliente.ValidationResult?.Errors);
         }
     }
 }

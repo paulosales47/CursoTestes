@@ -17,7 +17,8 @@ namespace Features.Tests
                 DateTime.Now.AddYears(-30),
                 "teste@teste.net",
                 true,
-                DateTime.Now);
+                DateTime.Now,
+                "71757015604");
 
             // Act
             var result = cliente.EhValido();
@@ -39,14 +40,15 @@ namespace Features.Tests
                 DateTime.Now,
                 "teste2dominio.com",
                 true,
-                DateTime.Now);
+                DateTime.Now,
+                "12302750888");
 
             // Act
             var result = cliente.EhValido();
 
             // Assert 
             Assert.False(result);
-            Assert.Empty(cliente.ValidationResult?.Errors);
+            Assert.NotEmpty(cliente.ValidationResult?.Errors);
         }
     }
 }

@@ -18,7 +18,8 @@ namespace Features.Tests
                 DateTime.Now.AddYears(-30),
                 "paulo@teste.net",
                 true,
-                DateTime.Now);
+                DateTime.Now,
+                "87284457830");
 
             return cliente;
         }
@@ -32,7 +33,8 @@ namespace Features.Tests
                 DateTime.Now,
                 "paulo2net.com",
                 true,
-                DateTime.Now);
+                DateTime.Now,
+                "38831900200");
 
             return cliente;
         }
